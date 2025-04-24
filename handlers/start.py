@@ -2,25 +2,25 @@ from aiogram import F, Router, types
 from aiogram.filters import Command, StateFilter
 from aiogram.fsm.context import FSMContext
 
-from loader import engine
 from database.msg import REPLIES
-from keyboards.keyboards import get_start_keyboard
+from keyboards.keyboards import buttons
+from keyboards.keyboards import get_funcs_keyboard
+from scripts.decorators import member_required
+from states.states import Position
 
 router = Router()
 
 
 @router.message(Command("start"))
-@router.message(F.text == "📖 Старт")
-async def cmd_help(message: types.Message):
-    await message.reply(REPLIES["START"], reply_markup=get_start_keyboard())
+@member_required
+async def cmd_start(message: types.Message, state: FSMContext):
+    await state.set_state(Position.main_menu)
+    await message.reply(REPLIES["START"], reply_markup=get_funcs_keyboard())
 
 
 @router.message(Command("help"))
-@router.message(F.text == "👤 Помощь")
-async def cmd_help(message: types.Message):
-    await message.reply(REPLIES["HELP"], reply_markup=get_start_keyboard())
-
-
-@router.message(F)
-async def cmd_help(message: types.Message):
-    await message.reply(message.text, reply_markup=get_start_keyboard())
+@router.message(F.text == buttons["help"])
+@member_required
+async def cmd_help(message: types.Message, state: FSMContext):
+    await state.set_state(Position.main_menu)
+    await message.reply(REPLIES["HELP"], reply_markup=get_funcs_keyboard())

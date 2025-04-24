@@ -1,1 +1,6 @@
-from handlers import start
+from . import (
+    get, 
+    settings, 
+    start,
+    incorrect
+)
