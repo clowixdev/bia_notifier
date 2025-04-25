@@ -7,6 +7,6 @@ class Position(StatesGroup):
     noti_off_settings = State()
     
     frequency_setting = State()
-    amount_setting = State()
+    dayinfo_setting = State()
     weekends_setting = State()
     visibility_setting = State()

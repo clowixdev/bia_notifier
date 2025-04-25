@@ -1,6 +1,7 @@
 from . import (
     get, 
-    settings, 
+    settings,
+    myinfo, 
     start,
     incorrect
 )

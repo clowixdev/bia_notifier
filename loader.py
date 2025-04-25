@@ -19,3 +19,4 @@ bot = Bot(
 
 engine = create_db_engine()
 dp = Dispatcher(storage=MemoryStorage())
+last_message = dict()

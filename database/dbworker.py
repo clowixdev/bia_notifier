@@ -24,10 +24,11 @@ def add_user(userdata: list, engine: Engine) -> User:
     try:
         user = User(
             id=userdata[0],
-            noti_period=userdata[1],
-            noti_amount=userdata[2],
-            noti_weekends=userdata[3],
-            noti_spoiler=userdata[4]
+            noti_status=userdata[1],
+            noti_freq=userdata[2],
+            noti_dayinfo=userdata[3],
+            noti_weekends=userdata[4],
+            noti_visibility=userdata[5]
         )
 
         session.add(user)
@@ -56,3 +57,79 @@ def get_user(user_id: Optional[int], engine: Engine) -> User:
         session.close()
 
     return user
+
+
+def turn_noti_on(user_id: int, engine: Engine) -> None:
+    session = create_session(engine)
+    user = []
+    try:
+        if user_id != None:
+            user = session.query(User).filter_by(id=user_id).first()
+            if not user:
+                return None
+        user.noti_status = 1
+        
+        session.add(user)
+        session.commit()
+    except BaseException as e:
+        print(e)
+        session.rollback()
+    finally:
+        session.close()
+
+
+def turn_noti_off(user_id: int, engine: Engine) -> None:
+    session = create_session(engine)
+    user = []
+    try:
+        if user_id != None:
+            user = session.query(User).filter_by(id=user_id).first()
+            if not user:
+                return None
+        user.noti_status = 0
+
+        session.add(user)
+        session.commit()
+    except BaseException as e:
+        print(e)
+        session.rollback()
+    finally:
+        session.close()
+
+
+def turn_dayinfo_on(user_id: int, engine: Engine) -> None:
+    session = create_session(engine)
+    user = []
+    try:
+        if user_id != None:
+            user = session.query(User).filter_by(id=user_id).first()
+            if not user:
+                return None
+        user.noti_dayinfo = 1
+
+        session.add(user)
+        session.commit()
+    except BaseException as e:
+        print(e)
+        session.rollback()
+    finally:
+        session.close()
+
+
+def turn_dayinfo_off(user_id: int, engine: Engine) -> None:
+    session = create_session(engine)
+    user = []
+    try:
+        if user_id != None:
+            user = session.query(User).filter_by(id=user_id).first()
+            if not user:
+                return None
+        user.noti_dayinfo = 0
+
+        session.add(user)
+        session.commit()
+    except BaseException as e:
+        print(e)
+        session.rollback()
+    finally:
+        session.close()

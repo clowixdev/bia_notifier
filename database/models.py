@@ -8,7 +8,7 @@ class User(Base):
 
     id = Column(Integer, primary_key=True)
     noti_status = Column(Boolean)
-    noti_period = Column(Integer)
-    noti_amount = Column(Integer)
+    noti_freq = Column(Integer)
+    noti_dayinfo = Column(Integer)
     noti_weekends = Column(Integer) # 145 - пн, чт, пт
-    noti_spoiler = Column(Boolean)
+    noti_visibility = Column(Boolean)
