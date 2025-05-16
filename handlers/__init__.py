@@ -3,5 +3,6 @@ from . import (
     settings,
     myinfo, 
     start,
+    contact,
     incorrect
 )

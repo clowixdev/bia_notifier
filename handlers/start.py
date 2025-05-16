@@ -6,7 +6,7 @@ from database.msg import REPLIES
 from database.dbworker import add_user, get_user
 from keyboards.keyboards import buttons
 from keyboards.keyboards import get_funcs_keyboard
-from scripts.decorators import member_required, console_logging, spam_checker
+from scripts.decorators import member_required, console_logging, spam_checker, chat_required
 from states.states import Position
 
 from loader import engine
@@ -16,16 +16,17 @@ router = Router()
 
 @router.message(Command("start"))
 @console_logging
+@chat_required
 @spam_checker
 async def cmd_start(message: types.Message, state: FSMContext):
     if (get_user(message.from_user.id, engine) is None):
         add_user([
             message.from_user.id,
-            0,
-            0,
-            0,
-            0,
-            0
+            0, # status
+            0, # remind
+            0, # dayinfo
+            "0", #weekends
+            0 # visibility
         ], engine)
 
     await state.set_state(Position.main_menu)

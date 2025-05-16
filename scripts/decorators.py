@@ -6,6 +6,7 @@ from time import time
 from database.dbworker import get_user
 from loader import engine, last_message
 
+
 def spam_checker(func: Callable) -> Any:
     @wraps(func)
     async def wrapper(*args, **kwargs):
@@ -38,5 +39,14 @@ def console_logging(func: Callable) -> Any:
             username=args[0].from_user.username,
             func_name=func.__name__
         ))
+        return await func(*args, **kwargs)
+    return wrapper
+
+
+def chat_required(func: Callable) -> Any:
+    @wraps(func)
+    async def wrapper(*args, **kwargs):
+        if (args[0].from_user.id != args[0].chat.id):
+            return
         return await func(*args, **kwargs)
     return wrapper

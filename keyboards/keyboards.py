@@ -5,7 +5,7 @@ buttons = {
     "settings": "⚙️ Настройки",
     "help": "ℹ️ Помощь",
     "my_info": "🪪 Мой профиль",
-    "noti_frequency": "🔔 Частота оповещений",
+    "noti_remind": "🔔 Оповестить за ...",
     "noti_dayinfo_turn_on": "📑 Включить повестку дня",
     "noti_dayinfo_turn_off": "💤 Выключить повестку дня",
     "noti_dayinfo_setup": "🕒 Настроить повестку дня",
@@ -22,14 +22,16 @@ buttons = {
     "wednesday": "🔮 Среда",
     "thursday": "🏈 Четверг",
     "friday": "🍻 Пятница",
-    "saturday": "🌆 Суббота"
+    "saturday": "🌆 Суббота",
+    "contact": "📨 Поддержка"
 }
 
 def get_funcs_keyboard():
     kb_list = [
         [KeyboardButton(text=buttons["get"])],
         [KeyboardButton(text=buttons["my_info"])],
-        [KeyboardButton(text=buttons["settings"]), KeyboardButton(text=buttons["help"])]
+        [KeyboardButton(text=buttons["settings"]), KeyboardButton(text=buttons["help"])],
+        [KeyboardButton(text=buttons["contact"])]
     ]
 
     keyboard = ReplyKeyboardMarkup(
@@ -44,7 +46,7 @@ def get_funcs_keyboard():
 
 def get_noti_on_keyboard(dayinfo_state: int):
     kb_list = [
-        [KeyboardButton(text=buttons["noti_frequency"]), KeyboardButton(
+        [KeyboardButton(text=buttons["noti_remind"]), KeyboardButton(
             text=buttons["noti_dayinfo_setup"] if dayinfo_state != 0 else buttons["noti_dayinfo_turn_on"]
             )],
         [KeyboardButton(text=buttons["noti_weekends"]), KeyboardButton(text=buttons["noti_visibility"])],

@@ -1,6 +1,6 @@
 import asyncio
 
-from handlers import start, get, settings, incorrect, myinfo
+from handlers import start, get, settings, incorrect, myinfo, contact
 from loader import bot, dp
 
 
@@ -9,6 +9,7 @@ async def main():
     dp.include_router(get.router)
     dp.include_router(settings.router)
     dp.include_router(myinfo.router)
+    dp.include_router(contact.router)
     dp.include_router(incorrect.router)
 
     await dp.start_polling(bot)
