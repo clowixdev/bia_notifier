@@ -20,3 +20,5 @@ bot = Bot(
 engine = create_db_engine()
 dp = Dispatcher(storage=MemoryStorage())
 last_message = dict()
+support_chat_id = environ.get("SUPPORT")
+uptime_tickets = 0
